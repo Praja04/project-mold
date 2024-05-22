@@ -59,6 +59,7 @@
                         <form id="form2-content">
                             <div class="box-body">
                                 <h4 class="mt-0 mb-20">2. History Mold:</h4>
+                                <h5 id="namapart"></h5>
                                 <div class="form-group">
                                     <label class="form-label">Tanggal Update:</label>
                                     <input class="form-control" type="datetime-local" id="tanggal_update">
@@ -188,7 +189,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label" for="spek">Spesifikasi</label>
-                                    <textarea class="form-control"  rows="3" id="spek" name="spek" placeholder="Spesifikasi"></textarea>
+                                    <textarea class="form-control" rows="3" id="spek" name="spek" placeholder="Spesifikasi"></textarea>
                                 </div>
                                 <div class="form-group" style="visibility: hidden;">
                                     <label class="form-label" for="hasilverif">Hasil Verifikasi</label>
@@ -227,6 +228,7 @@
     $(document).ready(function() {
         let moldId = '';
         $('#partname').change(function() {
+            var partname = document.getElementById('partname');
             var selectedOption = $(this).find('option:selected');
             var madeIn = selectedOption.data('made-in');
             var status = selectedOption.data('status');
@@ -237,6 +239,7 @@
                 // $('#statusContent').text('Status: ' + status);
                 // $('#materialContent').text('Material: ' + material);
                 // $('#moldIdContent').text('Mold ID: ' + moldId);
+                $('#namapart').text('Part Name: ' + selectedOption.val());
                 // //$('#additionalContent').show();
 
                 // Gabungkan teks dari elemen-elemen tersebut
