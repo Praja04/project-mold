@@ -3,11 +3,27 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\FormModel;
+use App\Models\MoldItemModel;
 use App\Models\DetailMold;
 
 class Admin extends BaseController
 {
+    public function index2()
+    {
+        if (session()->get('admin_nama') == '') {
+            session()->setFlashdata('gagal', 'Anda belum login');
+            return redirect()->to(base_url('/'));
+        }
+
+        $TotalItems = new MoldItemModel();
+        $TotalUser = new UserModel();
+        $GetTotalItem = $TotalItems->TotalAllItems();
+        $GetTotalUser = $TotalUser->TotalUser();
+        $Data['totalItem'] = $GetTotalItem;
+        $Data['totalUser'] = $GetTotalUser;
+
+        return view('pages/admin/dashboard' , $Data);
+    }
 
     public function index()
     {
@@ -52,11 +68,11 @@ class Admin extends BaseController
         return view('pages/admin/usermanage', ['moldData' => $moldData, 'username' => $username]);
     }
 
-    
+
 
     public function getUserMold()
     {
-        
+
         $user = new UserModel();
         $GetUser = $user->getUser();
         $this->response->setContentType('application/json');

@@ -6,7 +6,7 @@
 						<!-- sidebar menu-->
 						<ul class="sidebar-menu" data-widget="tree">
 							<li class="header">Menu</li>
-							<?php if (session()->get('admin_nama')): ?>
+							<?php if (session()->get('admin_nama')) : ?>
 								<li class="treeview">
 									<a href="#">
 										<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
@@ -15,22 +15,23 @@
 											<i class="fa fa-angle-right pull-right"></i>
 									</a>
 									<ul class="treeview-menu">
+										<li><a href="<?= base_url('/dashboard') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard</a></li>
 										<li><a href="<?= base_url('/admin') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Manage Users Mold</a></li>
 									</ul>
 								</li>
 							<?php else : ?>
 								<li class="treeview">
-								<a href="#">
-									<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
-									<span>Manage your mold</span>
-									<span class="pull-right-container">
-										<i class="fa fa-angle-right pull-right"></i>
-								</a>
-								<ul class="treeview-menu">
-									<li><a href="<?= base_url('/dashboard') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>User Dashboard</a></li>
-									<li><a href="<?= base_url('/form') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Form Mold</a></li>
-								</ul>
-							</li>
+									<a href="#">
+										<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+										<span>Manage your mold</span>
+										<span class="pull-right-container">
+											<i class="fa fa-angle-right pull-right"></i>
+									</a>
+									<ul class="treeview-menu">
+										<li><a href="<?= base_url('/dashboard') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>User Dashboard</a></li>
+										<li><a href="<?= base_url('/form') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Form Mold</a></li>
+									</ul>
+								</li>
 							<?php endif; ?>
 							</li>
 						</ul>

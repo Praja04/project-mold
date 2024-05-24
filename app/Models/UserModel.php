@@ -19,5 +19,9 @@ class UserModel extends Model
         return $this->findAll(); 
     }
 
+    public function TotalUser(){
+        return $this->db->table('users')->countAllResults();
+    }
+
 
 }

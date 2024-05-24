@@ -22,27 +22,23 @@
                                     <select class="form-select" id="partname">
                                         <option value="">Pilih Item</option>
                                         <?php foreach ($items as $item) : ?>
-                                            <option value="<?= $item['ITEM'] ?>" data-made-in="<?= $item['MADE_IN'] ?>" data-status="<?= $item['STATUS'] ?>" data-material="<?= $item['Material'] ?>" data-id="<?= $item['NO.'] ?>"><?= $item['ITEM'] ?></option>
+                                            <option value="<?= $item['ITEM'] ?>" data-made-in="<?= $item['MADE_IN'] ?>" data-status="<?= $item['STATUS'] ?>" data-material="<?= $item['Material'] ?>" data-id="<?= $item['NO.'] ?>" data-dimensi="<?= $item['DIMENSI_MOLD'] ?>"><?= $item['ITEM'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
 
-                                <!-- Element yang akan ditampilkan -->
+                                <!-- Element yang akan ditampilkan
                                 <div id="additionalContent">
                                     <p id="madeInContent"></p>
                                     <p id="statusContent"></p>
                                     <p id="materialContent"></p>
                                     <p id="moldIdContent" style="visibility: hidden;"></p>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label class="form-label">Detail Mold</label>
                                     <textarea id="outputTextarea" class="form-control" rows="3" placeholder="..." disabled></textarea>
                                 </div>
 
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="button" class="btn btn-primary me-2" id="nextBtnForm1">Next</button>
                             </div>
                         </form>
                     </div>
@@ -74,31 +70,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Deskripsi Mold:</label>
-                                    <input class="form-control" type="text" id="deskripsi_mold" placeholder="Deskripsi Gambar Mold">
+                                    <input class="form-control" type="text" id="dimensi_mold" disabled><br>
+                                    <input class="form-control" type="text" id="deskripsi_mold" placeholder="Tonase...">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Gambar Part:</label>
                                     <input class="form-control" type="file" id="gambar_part">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Deskripsi Part:</label>
-                                    <input class="form-control" type="text" id="deskripsi_part" placeholder="Deskripsi Gambar Part">
+                                    <label class="form-label">Deskripsi Part (gr):</label>
+                                    <input class="form-control" type="text" id="deskripsi_part" placeholder="Berat Part...">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Gambar Runner:</label>
                                     <input class="form-control" type="file" id="gambar_runner">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Deskripsi Part:</label>
-                                    <input class="form-control" type="text" id="deskripsi_runner" placeholder="Deskripsi Gambar Runner">
+                                    <label class="form-label">Deskripsi Runner (gr):</label>
+                                    <input class="form-control" type="text" id="deskripsi_runner" placeholder="Berat Runner...">
                                 </div>
 
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="button" class="btn btn-primary me-2" id="backBtnForm2">Back</button>
-                                <button type="button" class="btn btn-primary me-2" id="nextBtnForm2">Next</button>
-                            </div>
+                           
                         </form>
                     </div>
                     <!-- /.box -->
@@ -114,6 +107,7 @@
                         <form id="form3-content">
                             <div class="box-body">
                                 <h4 class="mt-0 mb-20">3. Drawing Produk:</h4>
+                                <h5 id="namapart2"></h5>
                                 <div class="form-group">
                                     <label class="form-label">Lampiran Drawing (pdf):</label>
                                     <input class="form-control" type="file" id="drawing_produk">
@@ -121,10 +115,6 @@
 
                             </div>
                             <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="button" class="btn btn-primary me-2" id="backBtnForm3">Back</button>
-                                <button type="button" class="btn btn-primary me-2" id="nextBtnForm3">Next</button>
-                            </div>
                         </form>
                     </div>
                     <!-- /.box -->
@@ -140,6 +130,7 @@
                         <form id="form4-content">
                             <div class="box-body">
                                 <h4 class="mt-0 mb-20">4. Verifikasi Mold:</h4>
+                                <h5 id="namapart2"></h5>
                                 <div class="form-group">
                                     <label class="form-label" for="subject_mold">Mold</label>
                                     <select class="form-select" name="subject_mold" id="subject_mold">
@@ -196,13 +187,10 @@
                                     <input class="form-control" type="hidden" class="form-control" id="hasilverif" name="hasilverif" value="0">
                                     <!-- Set default value for hasilverif -->
                                 </div>
-
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="button" class="btn btn-primary me-2" id="backBtnForm4">Back</button>
                                 <button type="button" class="btn btn-success" id="submitBtn">Submit</button>
                             </div>
+                            <!-- /.box-body -->
+                           
                         </form>
                     </div>
                     <!-- /.box -->
@@ -228,11 +216,11 @@
     $(document).ready(function() {
         let moldId = '';
         $('#partname').change(function() {
-            var partname = document.getElementById('partname');
             var selectedOption = $(this).find('option:selected');
             var madeIn = selectedOption.data('made-in');
             var status = selectedOption.data('status');
             var material = selectedOption.data('material');
+            var dimensi = selectedOption.data('dimensi');
             moldId = selectedOption.data('id');
             if (selectedOption.val()) {
                 // $('#madeInContent').text('Made In: ' + madeIn);
@@ -240,12 +228,11 @@
                 // $('#materialContent').text('Material: ' + material);
                 // $('#moldIdContent').text('Mold ID: ' + moldId);
                 $('#namapart').text('Part Name: ' + selectedOption.val());
+                $('#namapart2').text('Part Name: ' + selectedOption.val());
                 // //$('#additionalContent').show();
-
-                // Gabungkan teks dari elemen-elemen tersebut
+                var dimensiMold = 'Ukuran Dimensi Mold: ' + dimensi ;
                 var combinedText = 'Made In: ' + madeIn + '\n' + 'Status: ' + status + '\n' + 'Material: ' + material;
-
-                // Masukkan teks gabungan ke dalam textarea menggunakan jQuery
+                $('#dimensi_mold').val(dimensiMold);
                 $('#outputTextarea').val(combinedText);
             } else {
                 $('#additionalContent').hide();
@@ -271,74 +258,74 @@
             }
         }
 
-        // Function to hide/show forms
-        function toggleForms(form1Visible, form2Visible = false, form3Visible = false, form4Visible = false) {
-            $('#form1').toggle(form1Visible);
-            $('#form2').toggle(form2Visible);
-            $('#form3').toggle(form3Visible);
-            $('#form4').toggle(form4Visible);
-        }
+        // // Function to hide/show forms
+        // function toggleForms(form1Visible, form2Visible = false, form3Visible = false, form4Visible = false) {
+        //     $('#form1').toggle(form1Visible);
+        //     $('#form2').toggle(form2Visible);
+        //     $('#form3').toggle(form3Visible);
+        //     $('#form4').toggle(form4Visible);
+        // }
 
-        // Initial state: Show form 1, hide form 2 and form 3
-        toggleForms(true);
+        // // Initial state: Show form 1, hide form 2 and form 3
+        // toggleForms(true);
 
-        // Next button click event for form 1
-        $('#nextBtnForm1').click(function() {
-            // Validate form 1
-            if (validateForm1()) {
-                // If form 1 is valid, show form 2
-                toggleForms(false, true);
-            } else {
-                // If form 1 is not valid, show error or alert
-                showToast('Please fill all fields in form 1', true);
-            }
-        });
+        // // Next button click event for form 1
+        // $('#nextBtnForm1').click(function() {
+        //     // Validate form 1
+        //     if (validateForm1()) {
+        //         // If form 1 is valid, show form 2
+        //         toggleForms(false, true);
+        //     } else {
+        //         // If form 1 is not valid, show error or alert
+        //         showToast('Please fill all fields in form 1', true);
+        //     }
+        // });
 
-        // Back button click event for form 2
-        $('#backBtnForm2').click(function() {
-            // Show form 1 again
-            toggleForms(true);
-        });
+        // // Back button click event for form 2
+        // $('#backBtnForm2').click(function() {
+        //     // Show form 1 again
+        //     toggleForms(true);
+        // });
 
-        // Next button click event for form 2
-        $('#nextBtnForm2').click(function() {
-            // Validate form 2
-            if (validateForm2()) {
-                // If form 2 is valid, show form 3
-                toggleForms(false, false, true);
-            } else {
-                // If form 2 is not valid, show error or alert
-                showToast('Please fill all fields in form 2', true);
-            }
-        });
+        // // Next button click event for form 2
+        // $('#nextBtnForm2').click(function() {
+        //     // Validate form 2
+        //     if (validateForm2()) {
+        //         // If form 2 is valid, show form 3
+        //         toggleForms(false, false, true);
+        //     } else {
+        //         // If form 2 is not valid, show error or alert
+        //         showToast('Please fill all fields in form 2', true);
+        //     }
+        // });
 
-        // Back button click event for form 3
-        $('#backBtnForm3').click(function() {
-            // Show form 2 again
-            toggleForms(false, true);
-        });
+        // // Back button click event for form 3
+        // $('#backBtnForm3').click(function() {
+        //     // Show form 2 again
+        //     toggleForms(false, true);
+        // });
 
-        $('#nextBtnForm3').click(function() {
-            // Validate form 3
-            if (validateForm3()) {
-                // If form 2 is valid, show form 4
-                toggleForms(false, false, false, true);
-            } else {
-                // If form 3 is not valid, show error or alert
-                showToast('Please fill all fields in form 3', true);
-            }
-        });
+        // $('#nextBtnForm3').click(function() {
+        //     // Validate form 3
+        //     if (validateForm3()) {
+        //         // If form 2 is valid, show form 4
+        //         toggleForms(false, false, false, true);
+        //     } else {
+        //         // If form 3 is not valid, show error or alert
+        //         showToast('Please fill all fields in form 3', true);
+        //     }
+        // });
 
-        // Back button click event for form 4
-        $('#backBtnForm4').click(function() {
-            // Show form 3 again
-            toggleForms(false, false, true);
-        });
+        // // Back button click event for form 4
+        // $('#backBtnForm4').click(function() {
+        //     // Show form 3 again
+        //     toggleForms(false, false, true);
+        // });
 
         // Submit button click event for form 4
         $('#submitBtn').click(function() {
             // Validate form 4
-            if (validateForm4()) {
+            if (validateForm4() && validateForm2() && validateForm3() && validateForm1()) {
                 // If form 3 is valid, submit the form
                 submitForm();
             } else {
@@ -406,11 +393,7 @@
             formData.append('verif_ke', $('#verif_ke').val());
             formData.append('lk3', $('#lk3').val());
             formData.append('spek', $('#spek').val());
-            formData.append('hasilverif', '0'); // Default value
-
-            // for (let pair of formData.entries()) {
-            //     console.log(pair[0] + ',' + pair[1]);
-            // }
+            formData.append('hasilverif', '0'); 
             $.ajax({
                 url: '/submit2',
                 type: 'POST',

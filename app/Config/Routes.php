@@ -34,6 +34,7 @@ use CodeIgniter\Router\RouteCollection;
 
  //admin
 $routes->get('admin', 'Admin::index');
+$routes->get('dashboard-admin', 'Admin::index2');
 $routes->get('manage/(:num)', 'Admin::manage/$1');
 $routes->get('usermold', 'Admin::getUserMold');
 $routes->get('admin/mold_by_user/(:num)', 'Admin::getMoldByUser/$1');

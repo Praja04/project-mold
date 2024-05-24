@@ -30,4 +30,8 @@ class MoldItemModel extends Model
     {
         return $this->findAll();
     }
+
+    public function TotalAllItems(){
+        return $this->db->table('mold_item')->countAllResults();
+    }
 }

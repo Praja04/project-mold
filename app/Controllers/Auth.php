@@ -42,7 +42,7 @@ class Auth extends BaseController
             } elseif ($admin && password_verify($password, $admin['password'])) {
                 session()->set('admin_nama', $admin['username']);
                 session()->set('admin_id', $admin['id']);
-                return redirect()->to(base_url('/admin'));
+                return redirect()->to(base_url('/dashboard-admin'));
             } else {
                 session()->setFlashdata('gagal', 'Username atau password salah.');
                 return redirect()->to(base_url('/'));
